@@ -109,21 +109,75 @@ function FeetGallery() {
   const [images, setImages] = useState<GalleryImage[]>([
     {
       id: '1',
-      uri: 'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=400',
+      uri: 'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&q=80',
       comments: ['These look strong and healthy!', 'Beautiful natural shape'],
-      description: 'Walking on the beach',
+      description: 'Walking barefoot on the beach',
     },
     {
       id: '2',
-      uri: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
+      uri: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
       comments: ['Love the natural look', 'Great care taken here'],
       description: 'Relaxing at home',
     },
     {
       id: '3',
-      uri: 'https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400',
+      uri: 'https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&q=80',
       comments: ['Appreciate the diversity', 'Every foot is unique!'],
-      description: 'Morning yoga',
+      description: 'Morning yoga practice',
+    },
+    {
+      id: '4',
+      uri: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
+      comments: ['Love seeing feet in nature', 'So grounding and peaceful'],
+      description: 'Hiking in the mountains',
+    },
+    {
+      id: '5',
+      uri: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80',
+      comments: ['Beautiful diversity', 'All feet are worthy of care'],
+      description: 'Standing on grass',
+    },
+    {
+      id: '6',
+      uri: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80',
+      comments: ['Healthy and strong', 'Function over appearance!'],
+      description: 'Running on the track',
+    },
+    {
+      id: '7',
+      uri: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&q=80',
+      comments: ['Love the natural tones', 'Every shape is beautiful'],
+      description: 'Resting after a long walk',
+    },
+    {
+      id: '8',
+      uri: 'https://images.unsplash.com/photo-1445384763658-0400939829cd?w=600&q=80',
+      comments: ['Appreciate the care shown', 'Self-care is important'],
+      description: 'Spa day self-care',
+    },
+    {
+      id: '9',
+      uri: 'https://images.unsplash.com/photo-1540206395-68808572332f?w=600&q=80',
+      comments: ['Strong and capable', 'These carry us through life'],
+      description: 'Standing tall',
+    },
+    {
+      id: '10',
+      uri: 'https://images.unsplash.com/photo-1483721310020-03333e577078?w=600&q=80',
+      comments: ['Natural beauty', 'Celebrating diversity'],
+      description: 'Feet in the sand',
+    },
+    {
+      id: '11',
+      uri: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
+      comments: ['Active and healthy', 'Function is what matters'],
+      description: 'Athletic lifestyle',
+    },
+    {
+      id: '12',
+      uri: 'https://images.unsplash.com/photo-1525328437458-0c4d4db7cab4?w=600&q=80',
+      comments: ['Peaceful and grounded', 'Connection to earth'],
+      description: 'Meditation and mindfulness',
     },
   ]);
 
