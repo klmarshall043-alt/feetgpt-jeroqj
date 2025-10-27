@@ -27,10 +27,16 @@ export default function TabLayout() {
       label: 'Gallery',
     },
     {
-      name: 'ai-chat',
-      route: '/(tabs)/ai-chat',
-      icon: 'sparkles',
-      label: 'Ask AI',
+      name: 'community',
+      route: '/(tabs)/community',
+      icon: 'person.3.fill',
+      label: 'Community',
+    },
+    {
+      name: 'profile',
+      route: '/(tabs)/profile',
+      icon: 'person.fill',
+      label: 'Profile',
     },
   ];
 
@@ -49,9 +55,13 @@ export default function TabLayout() {
           <Icon sf="photo.fill" drawable="ic_gallery" />
           <Label>Gallery</Label>
         </NativeTabs.Trigger>
-        <NativeTabs.Trigger name="ai-chat">
-          <Icon sf="sparkles" drawable="ic_ai" />
-          <Label>Ask AI</Label>
+        <NativeTabs.Trigger name="community">
+          <Icon sf="person.3.fill" drawable="ic_community" />
+          <Label>Community</Label>
+        </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="profile">
+          <Icon sf="person.fill" drawable="ic_profile" />
+          <Label>Profile</Label>
         </NativeTabs.Trigger>
       </NativeTabs>
     );
@@ -91,9 +101,15 @@ export default function TabLayout() {
           }}
         />
         <Stack.Screen 
-          name="ai-chat" 
+          name="community" 
           options={{
-            title: 'Ask AI',
+            title: 'Community',
+          }}
+        />
+        <Stack.Screen 
+          name="profile" 
+          options={{
+            title: 'Profile',
           }}
         />
       </Stack>
