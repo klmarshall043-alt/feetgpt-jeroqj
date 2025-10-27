@@ -21,6 +21,12 @@ export default function TabLayout() {
       label: 'Learn',
     },
     {
+      name: 'ai-chat',
+      route: '/(tabs)/ai-chat',
+      icon: 'sparkles',
+      label: 'Ask AI',
+    },
+    {
       name: 'gallery',
       route: '/(tabs)/gallery',
       icon: 'photo.fill',
@@ -31,12 +37,6 @@ export default function TabLayout() {
       route: '/(tabs)/community',
       icon: 'person.3.fill',
       label: 'Community',
-    },
-    {
-      name: 'profile',
-      route: '/(tabs)/profile',
-      icon: 'person.fill',
-      label: 'Profile',
     },
   ];
 
@@ -51,6 +51,10 @@ export default function TabLayout() {
           <Icon sf="book.fill" drawable="ic_learn" />
           <Label>Learn</Label>
         </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="ai-chat">
+          <Icon sf="sparkles" drawable="ic_ai" />
+          <Label>Ask AI</Label>
+        </NativeTabs.Trigger>
         <NativeTabs.Trigger name="gallery">
           <Icon sf="photo.fill" drawable="ic_gallery" />
           <Label>Gallery</Label>
@@ -58,10 +62,6 @@ export default function TabLayout() {
         <NativeTabs.Trigger name="community">
           <Icon sf="person.3.fill" drawable="ic_community" />
           <Label>Community</Label>
-        </NativeTabs.Trigger>
-        <NativeTabs.Trigger name="profile">
-          <Icon sf="person.fill" drawable="ic_profile" />
-          <Label>Profile</Label>
         </NativeTabs.Trigger>
       </NativeTabs>
     );
@@ -95,6 +95,12 @@ export default function TabLayout() {
           }}
         />
         <Stack.Screen 
+          name="ai-chat" 
+          options={{
+            title: 'Ask AI',
+          }}
+        />
+        <Stack.Screen 
           name="gallery" 
           options={{
             title: 'Gallery',
@@ -104,12 +110,6 @@ export default function TabLayout() {
           name="community" 
           options={{
             title: 'Community',
-          }}
-        />
-        <Stack.Screen 
-          name="profile" 
-          options={{
-            title: 'Profile',
           }}
         />
       </Stack>
