@@ -15,6 +15,24 @@ export default function TabLayout() {
       label: 'Home',
     },
     {
+      name: 'learn',
+      route: '/(tabs)/learn',
+      icon: 'book.fill',
+      label: 'Learn',
+    },
+    {
+      name: 'gallery',
+      route: '/(tabs)/gallery',
+      icon: 'photo.fill',
+      label: 'Gallery',
+    },
+    {
+      name: 'community',
+      route: '/(tabs)/community',
+      icon: 'person.3.fill',
+      label: 'Community',
+    },
+    {
       name: 'profile',
       route: '/(tabs)/profile',
       icon: 'person.fill',
@@ -28,6 +46,18 @@ export default function TabLayout() {
         <NativeTabs.Trigger name="(home)">
           <Icon sf="house.fill" drawable="ic_home" />
           <Label>Home</Label>
+        </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="learn">
+          <Icon sf="book.fill" drawable="ic_learn" />
+          <Label>Learn</Label>
+        </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="gallery">
+          <Icon sf="photo.fill" drawable="ic_gallery" />
+          <Label>Gallery</Label>
+        </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="community">
+          <Icon sf="person.3.fill" drawable="ic_community" />
+          <Label>Community</Label>
         </NativeTabs.Trigger>
         <NativeTabs.Trigger name="profile">
           <Icon sf="person.fill" drawable="ic_profile" />
@@ -56,6 +86,24 @@ export default function TabLayout() {
           name="(home)" 
           options={{
             title: 'FeetGPT',
+          }}
+        />
+        <Stack.Screen 
+          name="learn" 
+          options={{
+            title: 'Learn',
+          }}
+        />
+        <Stack.Screen 
+          name="gallery" 
+          options={{
+            title: 'Gallery',
+          }}
+        />
+        <Stack.Screen 
+          name="community" 
+          options={{
+            title: 'Community',
           }}
         />
         <Stack.Screen 

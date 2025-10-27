@@ -116,7 +116,7 @@ export default function FloatingTabBar({
             >
               <IconSymbol
                 name={tab.icon as any}
-                size={24}
+                size={22}
                 color={isActive ? colors.primary : colors.textSecondary}
               />
               <Text
@@ -163,9 +163,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
-    gap: 4,
+    gap: 2,
   },
   label: {
-    fontSize: 11,
+    fontSize: 10,
   },
 });
