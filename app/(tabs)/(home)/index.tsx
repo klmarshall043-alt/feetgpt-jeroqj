@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Stack } from "expo-router";
-import { StyleSheet, View, Text, ScrollView, Platform } from "react-native";
+import { StyleSheet, View, Text, ScrollView, Platform, Image } from "react-native";
 import { IconSymbol } from "@/components/IconSymbol";
 import { colors } from "@/styles/commonStyles";
 import SelfCareTips from "@/components/SelfCareTips";
@@ -28,7 +28,7 @@ export default function HomeScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
-          {/* Hero Section with Footprint Pattern */}
+          {/* Hero Section with Logo */}
           <View style={styles.heroSection}>
             <View style={styles.footprintPattern}>
               <View style={styles.footprintLeft}>
@@ -38,10 +38,12 @@ export default function HomeScreen() {
                 <IconSymbol name="figure.walk" size={40} color={colors.footprint} style={styles.footprintIcon} />
               </View>
             </View>
-            <View style={styles.heroIconContainer}>
-              <View style={styles.heroIconCircle}>
-                <IconSymbol name="heart.circle.fill" size={64} color={colors.wellness} />
-              </View>
+            <View style={styles.logoContainer}>
+              <Image 
+                source={require('@/assets/images/79afa96e-51b5-4b68-bf0b-5916da7e5df1.png')}
+                style={styles.logo}
+                resizeMode="contain"
+              />
             </View>
             <Text style={styles.heroTitle}>Welcome to FeetGPT</Text>
             <Text style={styles.heroSubtitle}>
@@ -126,19 +128,17 @@ const styles = StyleSheet.create({
   footprintIcon: {
     opacity: 0.5,
   },
-  heroIconContainer: {
+  logoContainer: {
     marginBottom: 16,
     zIndex: 1,
-  },
-  heroIconCircle: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: colors.accent + '20',
+    width: 140,
+    height: 140,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 3,
-    borderColor: colors.accent + '40',
+  },
+  logo: {
+    width: '100%',
+    height: '100%',
   },
   heroTitle: {
     fontSize: 32,

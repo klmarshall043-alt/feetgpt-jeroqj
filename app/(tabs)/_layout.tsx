@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Image, View, StyleSheet } from 'react-native';
 import { NativeTabs, Icon, Label } from 'expo-router/unstable-native-tabs';
 import { Stack } from 'expo-router';
 import FloatingTabBar, { TabBarItem } from '@/components/FloatingTabBar';
@@ -39,6 +39,16 @@ export default function TabLayout() {
       label: 'Profile',
     },
   ];
+
+  const HeaderLogo = () => (
+    <View style={headerStyles.logoContainer}>
+      <Image 
+        source={require('@/assets/images/79afa96e-51b5-4b68-bf0b-5916da7e5df1.png')}
+        style={headerStyles.logo}
+        resizeMode="contain"
+      />
+    </View>
+  );
 
   if (Platform.OS === 'ios') {
     return (
@@ -80,6 +90,7 @@ export default function TabLayout() {
             fontWeight: '700',
           },
           animation: 'none',
+          headerLeft: () => <HeaderLogo />,
         }}
       >
         <Stack.Screen 
@@ -117,3 +128,17 @@ export default function TabLayout() {
     </>
   );
 }
+
+const headerStyles = StyleSheet.create({
+  logoContainer: {
+    width: 32,
+    height: 32,
+    marginLeft: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: '100%',
+    height: '100%',
+  },
+});

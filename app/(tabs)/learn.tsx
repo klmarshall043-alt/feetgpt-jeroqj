@@ -1,21 +1,21 @@
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Platform, Pressable } from 'react-native';
 import { Stack } from 'expo-router';
+import { View, Text, StyleSheet, ScrollView, Platform, Pressable, Image } from 'react-native';
 import { IconSymbol } from '@/components/IconSymbol';
 import { colors } from '@/styles/commonStyles';
 
 type LearnSection = 'symptom' | 'routine' | 'facts';
 
 export default function LearnScreen() {
-  const [activeSection, setActiveSection] = useState<LearnSection>('facts');
+  const [activeSection, setActiveSection] = useState<LearnSection>('symptom');
 
   return (
     <>
       {Platform.OS === 'ios' && (
         <Stack.Screen
           options={{
-            title: 'Learn',
+            title: "Learn",
             headerLargeTitle: true,
           }}
         />
@@ -29,14 +29,18 @@ export default function LearnScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
-          {/* Header with Feet Theme */}
+          {/* Header with Logo */}
           <View style={styles.header}>
-            <View style={styles.headerIconBg}>
-              <IconSymbol name="book.fill" size={48} color={colors.wellness} />
+            <View style={styles.logoContainer}>
+              <Image 
+                source={require('@/assets/images/79afa96e-51b5-4b68-bf0b-5916da7e5df1.png')}
+                style={styles.logo}
+                resizeMode="contain"
+              />
             </View>
-            <Text style={styles.headerTitle}>Foot Health Hub</Text>
+            <Text style={styles.headerTitle}>Foot Health Education</Text>
             <Text style={styles.headerSubtitle}>
-              Knowledge and care for healthier feet
+              Learn about foot care, health, and wellness
             </Text>
           </View>
 
@@ -45,19 +49,19 @@ export default function LearnScreen() {
             <Pressable
               style={[
                 styles.sectionButton,
-                activeSection === 'symptom' && styles.sectionButtonActive
+                activeSection === 'symptom' && styles.sectionButtonActive,
               ]}
               onPress={() => setActiveSection('symptom')}
             >
               <IconSymbol
                 name="stethoscope"
                 size={20}
-                color={activeSection === 'symptom' ? colors.card : colors.textSecondary}
+                color={activeSection === 'symptom' ? colors.primary : colors.textSecondary}
               />
               <Text
                 style={[
                   styles.sectionButtonText,
-                  activeSection === 'symptom' && styles.sectionButtonTextActive
+                  activeSection === 'symptom' && styles.sectionButtonTextActive,
                 ]}
               >
                 Symptom Checker
@@ -67,19 +71,19 @@ export default function LearnScreen() {
             <Pressable
               style={[
                 styles.sectionButton,
-                activeSection === 'routine' && styles.sectionButtonActive
+                activeSection === 'routine' && styles.sectionButtonActive,
               ]}
               onPress={() => setActiveSection('routine')}
             >
               <IconSymbol
                 name="calendar"
                 size={20}
-                color={activeSection === 'routine' ? colors.card : colors.textSecondary}
+                color={activeSection === 'routine' ? colors.primary : colors.textSecondary}
               />
               <Text
                 style={[
                   styles.sectionButtonText,
-                  activeSection === 'routine' && styles.sectionButtonTextActive
+                  activeSection === 'routine' && styles.sectionButtonTextActive,
                 ]}
               >
                 Care Routine
@@ -89,19 +93,19 @@ export default function LearnScreen() {
             <Pressable
               style={[
                 styles.sectionButton,
-                activeSection === 'facts' && styles.sectionButtonActive
+                activeSection === 'facts' && styles.sectionButtonActive,
               ]}
               onPress={() => setActiveSection('facts')}
             >
               <IconSymbol
                 name="lightbulb.fill"
                 size={20}
-                color={activeSection === 'facts' ? colors.card : colors.textSecondary}
+                color={activeSection === 'facts' ? colors.primary : colors.textSecondary}
               />
               <Text
                 style={[
                   styles.sectionButtonText,
-                  activeSection === 'facts' && styles.sectionButtonTextActive
+                  activeSection === 'facts' && styles.sectionButtonTextActive,
                 ]}
               >
                 Feet Facts
@@ -109,7 +113,7 @@ export default function LearnScreen() {
             </Pressable>
           </View>
 
-          {/* Content */}
+          {/* Content Sections */}
           {activeSection === 'symptom' && <SymptomChecker />}
           {activeSection === 'routine' && <CareRoutineBuilder />}
           {activeSection === 'facts' && <FeetFactsLibrary />}
@@ -126,76 +130,60 @@ function SymptomChecker() {
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
 
   const symptoms = [
-    { id: 'dryness', label: 'Dry or Cracked Skin', icon: 'drop.fill' },
-    { id: 'calluses', label: 'Calluses or Corns', icon: 'circle.fill' },
-    { id: 'fungal', label: 'Discoloration or Fungal Signs', icon: 'exclamationmark.triangle.fill' },
-    { id: 'pain', label: 'Pain or Discomfort', icon: 'bandage.fill' },
-    { id: 'odor', label: 'Unusual Odor', icon: 'nose.fill' },
-    { id: 'swelling', label: 'Swelling or Inflammation', icon: 'waveform.path.ecg' },
+    { id: '1', name: 'Dry Skin', icon: 'drop.fill', resource: 'Moisturize daily' },
+    { id: '2', name: 'Calluses', icon: 'bandage.fill', resource: 'Use pumice stone' },
+    { id: '3', name: 'Fungal Infection', icon: 'cross.case.fill', resource: 'See a podiatrist' },
+    { id: '4', name: 'Cracked Heels', icon: 'exclamationmark.triangle.fill', resource: 'Deep moisturizing treatment' },
+    { id: '5', name: 'Odor', icon: 'wind', resource: 'Improve hygiene routine' },
+    { id: '6', name: 'Pain', icon: 'heart.text.square.fill', resource: 'Consult healthcare provider' },
   ];
 
   const toggleSymptom = (id: string) => {
-    if (selectedSymptoms.includes(id)) {
-      setSelectedSymptoms(selectedSymptoms.filter(s => s !== id));
-    } else {
-      setSelectedSymptoms([...selectedSymptoms, id]);
-    }
+    setSelectedSymptoms((prev) =>
+      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
+    );
   };
 
   return (
-    <View style={styles.sectionContent}>
-      <Text style={styles.sectionTitle}>Self-Assessment</Text>
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>Symptom Checker</Text>
       <Text style={styles.sectionDescription}>
-        Select any symptoms you&apos;re experiencing. This is private and helps you identify common, treatable issues.
+        Select any symptoms you&apos;re experiencing to get helpful resources and guidance.
       </Text>
 
       <View style={styles.symptomGrid}>
-        {symptoms.map((symptom) => {
-          const isSelected = selectedSymptoms.includes(symptom.id);
-          return (
-            <Pressable
-              key={symptom.id}
+        {symptoms.map((symptom) => (
+          <Pressable
+            key={symptom.id}
+            style={[
+              styles.symptomCard,
+              selectedSymptoms.includes(symptom.id) && styles.symptomCardSelected,
+            ]}
+            onPress={() => toggleSymptom(symptom.id)}
+          >
+            <IconSymbol
+              name={symptom.icon as any}
+              size={32}
+              color={
+                selectedSymptoms.includes(symptom.id)
+                  ? colors.primary
+                  : colors.textSecondary
+              }
+            />
+            <Text
               style={[
-                styles.symptomCard,
-                isSelected && styles.symptomCardSelected
+                styles.symptomName,
+                selectedSymptoms.includes(symptom.id) && styles.symptomNameSelected,
               ]}
-              onPress={() => toggleSymptom(symptom.id)}
             >
-              <IconSymbol
-                name={symptom.icon as any}
-                size={28}
-                color={isSelected ? colors.wellness : colors.textSecondary}
-              />
-              <Text
-                style={[
-                  styles.symptomLabel,
-                  isSelected && styles.symptomLabelSelected
-                ]}
-              >
-                {symptom.label}
-              </Text>
-            </Pressable>
-          );
-        })}
+              {symptom.name}
+            </Text>
+            {selectedSymptoms.includes(symptom.id) && (
+              <Text style={styles.symptomResource}>{symptom.resource}</Text>
+            )}
+          </Pressable>
+        ))}
       </View>
-
-      {selectedSymptoms.length > 0 && (
-        <View style={styles.resultsCard}>
-          <IconSymbol name="info.circle.fill" size={24} color={colors.wellness} />
-          <View style={styles.resultsContent}>
-            <Text style={styles.resultsTitle}>Common Causes & Care</Text>
-            <Text style={styles.resultsText}>
-              Based on your selection, these symptoms are often treatable with proper foot care routines. Consider:
-            </Text>
-            <Text style={styles.resultsBullet}>- Daily moisturizing for dry skin</Text>
-            <Text style={styles.resultsBullet}>- Proper footwear to reduce pressure</Text>
-            <Text style={styles.resultsBullet}>- Regular cleaning and drying</Text>
-            <Text style={styles.resultsNote}>
-              For persistent issues, consult a podiatrist or dermatologist.
-            </Text>
-          </View>
-        </View>
-      )}
     </View>
   );
 }
@@ -204,119 +192,72 @@ function CareRoutineBuilder() {
   const [selectedRoutines, setSelectedRoutines] = useState<string[]>([]);
 
   const routines = [
-    {
-      id: 'soak',
-      title: 'Daily Foot Soak',
-      description: 'Warm water with Epsom salt for 10-15 minutes',
-      frequency: 'Daily',
-      icon: 'drop.fill',
-      color: colors.wellness,
-    },
-    {
-      id: 'moisturize',
-      title: 'Moisturizing',
-      description: 'Apply foot cream after washing and drying',
-      frequency: 'Twice Daily',
-      icon: 'sparkles',
-      color: colors.care,
-    },
-    {
-      id: 'stretch',
-      title: 'Foot Stretches',
-      description: 'Gentle stretches to improve flexibility',
-      frequency: 'Daily',
-      icon: 'figure.walk',
-      color: colors.primary,
-    },
-    {
-      id: 'massage',
-      title: 'Self-Massage',
-      description: 'Massage arches and pressure points',
-      frequency: '3x per week',
-      icon: 'hand.raised.fill',
-      color: colors.secondary,
-    },
-    {
-      id: 'trim',
-      title: 'Nail Care',
-      description: 'Trim nails straight across, file edges',
-      frequency: 'Weekly',
-      icon: 'scissors',
-      color: colors.care,
-    },
-    {
-      id: 'inspect',
-      title: 'Visual Inspection',
-      description: 'Check for changes, cuts, or issues',
-      frequency: 'Daily',
-      icon: 'eye.fill',
-      color: colors.wellness,
-    },
+    { id: '1', name: 'Daily Wash', frequency: 'Daily', icon: 'drop.fill' },
+    { id: '2', name: 'Moisturize', frequency: 'Daily', icon: 'sparkles' },
+    { id: '3', name: 'Trim Nails', frequency: 'Weekly', icon: 'scissors' },
+    { id: '4', name: 'Exfoliate', frequency: 'Weekly', icon: 'wand.and.stars' },
+    { id: '5', name: 'Foot Soak', frequency: 'Weekly', icon: 'water.waves' },
+    { id: '6', name: 'Stretch', frequency: 'Daily', icon: 'figure.flexibility' },
   ];
 
   const toggleRoutine = (id: string) => {
-    if (selectedRoutines.includes(id)) {
-      setSelectedRoutines(selectedRoutines.filter(r => r !== id));
-    } else {
-      setSelectedRoutines([...selectedRoutines, id]);
-    }
+    setSelectedRoutines((prev) =>
+      prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]
+    );
   };
 
   return (
-    <View style={styles.sectionContent}>
-      <Text style={styles.sectionTitle}>Build Your Care Routine</Text>
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>Care Routine Builder</Text>
       <Text style={styles.sectionDescription}>
-        Select activities to create your personalized foot care routine
+        Build your personalized foot care routine by selecting activities.
       </Text>
 
       <View style={styles.routineList}>
-        {routines.map((routine) => {
-          const isSelected = selectedRoutines.includes(routine.id);
-          return (
-            <Pressable
-              key={routine.id}
+        {routines.map((routine) => (
+          <Pressable
+            key={routine.id}
+            style={[
+              styles.routineCard,
+              selectedRoutines.includes(routine.id) && styles.routineCardSelected,
+            ]}
+            onPress={() => toggleRoutine(routine.id)}
+          >
+            <View style={styles.routineIcon}>
+              <IconSymbol
+                name={routine.icon as any}
+                size={28}
+                color={
+                  selectedRoutines.includes(routine.id)
+                    ? colors.primary
+                    : colors.textSecondary
+                }
+              />
+            </View>
+            <View style={styles.routineInfo}>
+              <Text
+                style={[
+                  styles.routineName,
+                  selectedRoutines.includes(routine.id) && styles.routineNameSelected,
+                ]}
+              >
+                {routine.name}
+              </Text>
+              <Text style={styles.routineFrequency}>{routine.frequency}</Text>
+            </View>
+            <View
               style={[
-                styles.routineCard,
-                isSelected && styles.routineCardSelected
+                styles.routineCheckbox,
+                selectedRoutines.includes(routine.id) && styles.routineCheckboxSelected,
               ]}
-              onPress={() => toggleRoutine(routine.id)}
             >
-              <View style={styles.routineHeader}>
-                <View style={[styles.routineIcon, { backgroundColor: routine.color + '30' }]}>
-                  <IconSymbol
-                    name={routine.icon as any}
-                    size={24}
-                    color={routine.color}
-                  />
-                </View>
-                <View style={styles.routineInfo}>
-                  <Text style={styles.routineTitle}>{routine.title}</Text>
-                  <Text style={styles.routineFrequency}>{routine.frequency}</Text>
-                </View>
-                <View style={[
-                  styles.checkbox,
-                  isSelected && styles.checkboxSelected
-                ]}>
-                  {isSelected && (
-                    <IconSymbol name="checkmark" size={16} color={colors.card} />
-                  )}
-                </View>
-              </View>
-              <Text style={styles.routineDescription}>{routine.description}</Text>
-            </Pressable>
-          );
-        })}
+              {selectedRoutines.includes(routine.id) && (
+                <IconSymbol name="checkmark" size={16} color={colors.primary} />
+              )}
+            </View>
+          </Pressable>
+        ))}
       </View>
-
-      {selectedRoutines.length > 0 && (
-        <View style={styles.routineSummary}>
-          <IconSymbol name="checkmark.circle.fill" size={24} color={colors.wellness} />
-          <Text style={styles.routineSummaryText}>
-            You&apos;ve selected {selectedRoutines.length} routine{selectedRoutines.length !== 1 ? 's' : ''}. 
-            Great start to healthier feet!
-          </Text>
-        </View>
-      )}
     </View>
   );
 }
@@ -325,78 +266,54 @@ function FeetFactsLibrary() {
   const facts = [
     {
       id: '1',
-      icon: 'figure.walk',
       title: 'Complex Structure',
       fact: 'The human foot has 26 bones, 33 joints, and over 100 muscles, tendons, and ligaments.',
-      color: colors.wellness,
+      icon: 'figure.walk',
     },
     {
       id: '2',
-      icon: 'bolt.fill',
-      title: 'Incredible Strength',
-      fact: 'Your feet can support 1.5 times your body weight when walking and up to 3 times when running.',
-      color: colors.care,
+      title: 'Weight Bearing',
+      fact: 'Your feet support the entire weight of your body and absorb 2-3 times your body weight when running.',
+      icon: 'figure.run',
     },
     {
       id: '3',
-      icon: 'heart.fill',
-      title: 'Sensory Powerhouse',
-      fact: 'Each foot has over 7,000 nerve endings, making them highly sensitive to touch and pressure.',
-      color: colors.primary,
+      title: 'Sweat Glands',
+      fact: 'Each foot has about 250,000 sweat glands, producing up to half a pint of perspiration daily.',
+      icon: 'drop.fill',
     },
     {
       id: '4',
-      icon: 'arrow.up.arrow.down',
-      title: 'Balance Masters',
-      fact: 'Your feet play a crucial role in balance and posture, constantly adjusting to keep you stable.',
-      color: colors.secondary,
+      title: 'Steps Per Day',
+      fact: 'The average person takes 8,000-10,000 steps per day, which adds up to about 115,000 miles in a lifetime.',
+      icon: 'figure.walk.circle',
     },
     {
       id: '5',
-      icon: 'drop.fill',
-      title: 'Natural Shock Absorbers',
-      fact: 'The arch of your foot acts as a natural shock absorber, distributing impact forces efficiently.',
-      color: colors.wellness,
+      title: 'Balance & Posture',
+      fact: 'Your feet play a crucial role in maintaining balance and proper posture throughout your entire body.',
+      icon: 'figure.stand',
     },
     {
       id: '6',
-      icon: 'figure.run',
-      title: 'Lifetime Journey',
-      fact: 'The average person walks about 110,000 miles in their lifetime - that&apos;s like walking around the Earth 4 times!',
-      color: colors.care,
-    },
-    {
-      id: '7',
-      icon: 'thermometer',
-      title: 'Temperature Regulation',
-      fact: 'Feet help regulate body temperature through sweat glands - each foot has about 250,000 of them!',
-      color: colors.primary,
-    },
-    {
-      id: '8',
-      icon: 'sparkles',
-      title: 'Unique Identity',
-      fact: 'Just like fingerprints, your footprints are unique to you. No two people have identical foot patterns.',
-      color: colors.wellness,
+      title: 'Nerve Endings',
+      fact: 'Feet contain thousands of nerve endings, making them highly sensitive to touch, pressure, and temperature.',
+      icon: 'brain.head.profile',
     },
   ];
 
   return (
-    <View style={styles.sectionContent}>
+    <View style={styles.section}>
       <Text style={styles.sectionTitle}>Feet Facts Library</Text>
       <Text style={styles.sectionDescription}>
-        Celebrate the complexity and function of your amazing feet
+        Discover fascinating facts about your feet and their incredible capabilities.
       </Text>
 
       <View style={styles.factsList}>
         {facts.map((fact) => (
           <View key={fact.id} style={styles.factCard}>
-            <View style={[styles.factIcon, { backgroundColor: fact.color + '30' }]}>
-              <IconSymbol
-                name={fact.icon as any}
-                size={28}
-                color={fact.color}
-              />
+            <View style={styles.factIconContainer}>
+              <IconSymbol name={fact.icon as any} size={32} color={colors.primary} />
             </View>
             <View style={styles.factContent}>
               <Text style={styles.factTitle}>{fact.title}</Text>
@@ -428,61 +345,63 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 24,
     paddingVertical: 20,
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    boxShadow: '0px 4px 12px rgba(141, 110, 99, 0.15)',
+    elevation: 3,
   },
-  headerIconBg: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    backgroundColor: colors.accent + '30',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-    borderWidth: 3,
-    borderColor: colors.accent + '50',
+  logoContainer: {
+    width: 80,
+    height: 80,
+    marginBottom: 12,
+  },
+  logo: {
+    width: '100%',
+    height: '100%',
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: 24,
+    fontWeight: '700',
     color: colors.text,
     marginBottom: 8,
   },
   headerSubtitle: {
-    fontSize: 15,
+    fontSize: 14,
     color: colors.textSecondary,
     textAlign: 'center',
   },
   sectionSelector: {
     flexDirection: 'row',
-    gap: 8,
     marginBottom: 24,
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 4,
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 2,
   },
   sectionButton: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 8,
-    backgroundColor: colors.card,
     borderRadius: 12,
-    borderWidth: 2,
-    borderColor: colors.highlight,
-    gap: 6,
+    gap: 4,
   },
   sectionButtonActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    backgroundColor: colors.primary + '20',
   },
   sectionButtonText: {
     fontSize: 11,
-    fontWeight: '600',
     color: colors.textSecondary,
+    fontWeight: '500',
     textAlign: 'center',
   },
   sectionButtonTextActive: {
-    color: colors.card,
+    color: colors.primary,
+    fontWeight: '700',
   },
-  sectionContent: {
+  section: {
     marginBottom: 24,
   },
   sectionTitle: {
@@ -494,171 +413,120 @@ const styles = StyleSheet.create({
   sectionDescription: {
     fontSize: 14,
     color: colors.textSecondary,
+    marginBottom: 16,
     lineHeight: 20,
-    marginBottom: 20,
   },
   symptomGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 12,
-    marginBottom: 20,
   },
   symptomCard: {
     width: '48%',
     backgroundColor: colors.card,
-    borderRadius: 12,
+    borderRadius: 16,
     padding: 16,
     alignItems: 'center',
-    gap: 8,
     borderWidth: 2,
-    borderColor: colors.highlight,
-  },
-  symptomCardSelected: {
-    borderColor: colors.wellness,
-    backgroundColor: colors.accent + '15',
-  },
-  symptomLabel: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: colors.textSecondary,
-    textAlign: 'center',
-  },
-  symptomLabelSelected: {
-    color: colors.wellness,
-  },
-  resultsCard: {
-    backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: 16,
-    flexDirection: 'row',
-    gap: 12,
-    borderLeftWidth: 4,
-    borderLeftColor: colors.wellness,
-    boxShadow: '0px 3px 8px rgba(128, 203, 196, 0.2)',
+    borderColor: 'transparent',
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
     elevation: 2,
   },
-  resultsContent: {
-    flex: 1,
+  symptomCardSelected: {
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '10',
   },
-  resultsTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 8,
-  },
-  resultsText: {
+  symptomName: {
     fontSize: 14,
+    fontWeight: '600',
     color: colors.text,
-    lineHeight: 20,
-    marginBottom: 8,
+    marginTop: 8,
+    textAlign: 'center',
   },
-  resultsBullet: {
-    fontSize: 13,
-    color: colors.textSecondary,
-    lineHeight: 20,
-    marginLeft: 8,
+  symptomNameSelected: {
+    color: colors.primary,
   },
-  resultsNote: {
+  symptomResource: {
     fontSize: 12,
     color: colors.textSecondary,
-    fontStyle: 'italic',
-    marginTop: 8,
+    marginTop: 4,
+    textAlign: 'center',
   },
   routineList: {
     gap: 12,
-    marginBottom: 20,
   },
   routineCard: {
-    backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: 16,
-    borderWidth: 2,
-    borderColor: colors.highlight,
-  },
-  routineCardSelected: {
-    borderColor: colors.wellness,
-    backgroundColor: colors.accent + '10',
-  },
-  routineHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
-    gap: 12,
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 2,
+    borderColor: 'transparent',
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 2,
+  },
+  routineCardSelected: {
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '10',
   },
   routineIcon: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    alignItems: 'center',
+    backgroundColor: colors.accent,
     justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
   },
   routineInfo: {
     flex: 1,
   },
-  routineTitle: {
+  routineName: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '600',
     color: colors.text,
-    marginBottom: 2,
+    marginBottom: 4,
+  },
+  routineNameSelected: {
+    color: colors.primary,
   },
   routineFrequency: {
-    fontSize: 12,
+    fontSize: 13,
     color: colors.textSecondary,
-    fontWeight: '600',
   },
-  routineDescription: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    lineHeight: 20,
-    marginLeft: 60,
-  },
-  checkbox: {
+  routineCheckbox: {
     width: 24,
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: colors.highlight,
-    alignItems: 'center',
+    borderColor: colors.textSecondary,
     justifyContent: 'center',
-  },
-  checkboxSelected: {
-    backgroundColor: colors.wellness,
-    borderColor: colors.wellness,
-  },
-  routineSummary: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    backgroundColor: colors.accent + '20',
-    padding: 16,
-    borderRadius: 12,
   },
-  routineSummaryText: {
-    flex: 1,
-    fontSize: 14,
-    color: colors.text,
-    fontWeight: '600',
+  routineCheckboxSelected: {
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '20',
   },
   factsList: {
-    gap: 16,
+    gap: 12,
   },
   factCard: {
-    backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: 16,
     flexDirection: 'row',
-    gap: 12,
-    boxShadow: '0px 3px 8px rgba(141, 110, 99, 0.15)',
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 16,
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
     elevation: 2,
-    borderLeftWidth: 4,
-    borderLeftColor: colors.footprint,
   },
-  factIcon: {
+  factIconContainer: {
     width: 56,
     height: 56,
     borderRadius: 28,
-    alignItems: 'center',
+    backgroundColor: colors.accent,
     justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
   },
   factContent: {
     flex: 1,
