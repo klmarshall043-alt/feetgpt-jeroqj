@@ -4,7 +4,6 @@ import { View, Text, StyleSheet, ScrollView, Platform, Pressable } from 'react-n
 import { Stack } from 'expo-router';
 import { IconSymbol } from '@/components/IconSymbol';
 import { colors } from '@/styles/commonStyles';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 type LearnSection = 'symptom' | 'routine' | 'facts';
 
@@ -30,9 +29,11 @@ export default function LearnScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
-          {/* Header */}
+          {/* Header with Feet Theme */}
           <View style={styles.header}>
-            <IconSymbol name="book.fill" size={48} color={colors.primary} />
+            <View style={styles.headerIconBg}>
+              <IconSymbol name="book.fill" size={48} color={colors.wellness} />
+            </View>
             <Text style={styles.headerTitle}>Foot Health Hub</Text>
             <Text style={styles.headerSubtitle}>
               Knowledge and care for healthier feet
@@ -163,7 +164,7 @@ function SymptomChecker() {
               <IconSymbol
                 name={symptom.icon as any}
                 size={28}
-                color={isSelected ? colors.primary : colors.textSecondary}
+                color={isSelected ? colors.wellness : colors.textSecondary}
               />
               <Text
                 style={[
@@ -180,15 +181,15 @@ function SymptomChecker() {
 
       {selectedSymptoms.length > 0 && (
         <View style={styles.resultsCard}>
-          <IconSymbol name="info.circle.fill" size={24} color={colors.primary} />
+          <IconSymbol name="info.circle.fill" size={24} color={colors.wellness} />
           <View style={styles.resultsContent}>
             <Text style={styles.resultsTitle}>Common Causes & Care</Text>
             <Text style={styles.resultsText}>
               Based on your selection, these symptoms are often treatable with proper foot care routines. Consider:
             </Text>
-            <Text style={styles.resultsBullet}>• Daily moisturizing for dry skin</Text>
-            <Text style={styles.resultsBullet}>• Proper footwear to reduce pressure</Text>
-            <Text style={styles.resultsBullet}>• Regular cleaning and drying</Text>
+            <Text style={styles.resultsBullet}>- Daily moisturizing for dry skin</Text>
+            <Text style={styles.resultsBullet}>- Proper footwear to reduce pressure</Text>
+            <Text style={styles.resultsBullet}>- Regular cleaning and drying</Text>
             <Text style={styles.resultsNote}>
               For persistent issues, consult a podiatrist or dermatologist.
             </Text>
@@ -209,7 +210,7 @@ function CareRoutineBuilder() {
       description: 'Warm water with Epsom salt for 10-15 minutes',
       frequency: 'Daily',
       icon: 'drop.fill',
-      color: '#4A90E2',
+      color: colors.wellness,
     },
     {
       id: 'moisturize',
@@ -217,7 +218,7 @@ function CareRoutineBuilder() {
       description: 'Apply foot cream after washing and drying',
       frequency: 'Twice Daily',
       icon: 'sparkles',
-      color: '#50C878',
+      color: colors.care,
     },
     {
       id: 'stretch',
@@ -225,7 +226,7 @@ function CareRoutineBuilder() {
       description: 'Gentle stretches to improve flexibility',
       frequency: 'Daily',
       icon: 'figure.walk',
-      color: '#FF6B6B',
+      color: colors.primary,
     },
     {
       id: 'massage',
@@ -233,7 +234,7 @@ function CareRoutineBuilder() {
       description: 'Massage arches and pressure points',
       frequency: '3x per week',
       icon: 'hand.raised.fill',
-      color: '#9B59B6',
+      color: colors.secondary,
     },
     {
       id: 'trim',
@@ -241,7 +242,7 @@ function CareRoutineBuilder() {
       description: 'Trim nails straight across, file edges',
       frequency: 'Weekly',
       icon: 'scissors',
-      color: '#F39C12',
+      color: colors.care,
     },
     {
       id: 'inspect',
@@ -249,7 +250,7 @@ function CareRoutineBuilder() {
       description: 'Check for changes, cuts, or issues',
       frequency: 'Daily',
       icon: 'eye.fill',
-      color: '#3498DB',
+      color: colors.wellness,
     },
   ];
 
@@ -281,7 +282,7 @@ function CareRoutineBuilder() {
               onPress={() => toggleRoutine(routine.id)}
             >
               <View style={styles.routineHeader}>
-                <View style={[styles.routineIcon, { backgroundColor: routine.color + '20' }]}>
+                <View style={[styles.routineIcon, { backgroundColor: routine.color + '30' }]}>
                   <IconSymbol
                     name={routine.icon as any}
                     size={24}
@@ -309,7 +310,7 @@ function CareRoutineBuilder() {
 
       {selectedRoutines.length > 0 && (
         <View style={styles.routineSummary}>
-          <IconSymbol name="checkmark.circle.fill" size={24} color={colors.primary} />
+          <IconSymbol name="checkmark.circle.fill" size={24} color={colors.wellness} />
           <Text style={styles.routineSummaryText}>
             You&apos;ve selected {selectedRoutines.length} routine{selectedRoutines.length !== 1 ? 's' : ''}. 
             Great start to healthier feet!
@@ -327,56 +328,56 @@ function FeetFactsLibrary() {
       icon: 'figure.walk',
       title: 'Complex Structure',
       fact: 'The human foot has 26 bones, 33 joints, and over 100 muscles, tendons, and ligaments.',
-      color: '#4A90E2',
+      color: colors.wellness,
     },
     {
       id: '2',
       icon: 'bolt.fill',
       title: 'Incredible Strength',
       fact: 'Your feet can support 1.5 times your body weight when walking and up to 3 times when running.',
-      color: '#FF6B6B',
+      color: colors.care,
     },
     {
       id: '3',
       icon: 'heart.fill',
       title: 'Sensory Powerhouse',
       fact: 'Each foot has over 7,000 nerve endings, making them highly sensitive to touch and pressure.',
-      color: '#50C878',
+      color: colors.primary,
     },
     {
       id: '4',
       icon: 'arrow.up.arrow.down',
       title: 'Balance Masters',
       fact: 'Your feet play a crucial role in balance and posture, constantly adjusting to keep you stable.',
-      color: '#9B59B6',
+      color: colors.secondary,
     },
     {
       id: '5',
       icon: 'drop.fill',
       title: 'Natural Shock Absorbers',
       fact: 'The arch of your foot acts as a natural shock absorber, distributing impact forces efficiently.',
-      color: '#F39C12',
+      color: colors.wellness,
     },
     {
       id: '6',
       icon: 'figure.run',
       title: 'Lifetime Journey',
       fact: 'The average person walks about 110,000 miles in their lifetime - that&apos;s like walking around the Earth 4 times!',
-      color: '#3498DB',
+      color: colors.care,
     },
     {
       id: '7',
       icon: 'thermometer',
       title: 'Temperature Regulation',
       fact: 'Feet help regulate body temperature through sweat glands - each foot has about 250,000 of them!',
-      color: '#E74C3C',
+      color: colors.primary,
     },
     {
       id: '8',
       icon: 'sparkles',
       title: 'Unique Identity',
       fact: 'Just like fingerprints, your footprints are unique to you. No two people have identical foot patterns.',
-      color: '#1ABC9C',
+      color: colors.wellness,
     },
   ];
 
@@ -390,7 +391,7 @@ function FeetFactsLibrary() {
       <View style={styles.factsList}>
         {facts.map((fact) => (
           <View key={fact.id} style={styles.factCard}>
-            <View style={[styles.factIcon, { backgroundColor: fact.color + '20' }]}>
+            <View style={[styles.factIcon, { backgroundColor: fact.color + '30' }]}>
               <IconSymbol
                 name={fact.icon as any}
                 size={28}
@@ -428,11 +429,21 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     paddingVertical: 20,
   },
+  headerIconBg: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: colors.accent + '30',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 3,
+    borderColor: colors.accent + '50',
+  },
   headerTitle: {
     fontSize: 28,
     fontWeight: '800',
     color: colors.text,
-    marginTop: 12,
     marginBottom: 8,
   },
   headerSubtitle: {
@@ -503,8 +514,8 @@ const styles = StyleSheet.create({
     borderColor: colors.highlight,
   },
   symptomCardSelected: {
-    borderColor: colors.primary,
-    backgroundColor: colors.primary + '10',
+    borderColor: colors.wellness,
+    backgroundColor: colors.accent + '15',
   },
   symptomLabel: {
     fontSize: 13,
@@ -513,7 +524,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   symptomLabelSelected: {
-    color: colors.primary,
+    color: colors.wellness,
   },
   resultsCard: {
     backgroundColor: colors.card,
@@ -522,7 +533,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 12,
     borderLeftWidth: 4,
-    borderLeftColor: colors.primary,
+    borderLeftColor: colors.wellness,
+    boxShadow: '0px 3px 8px rgba(128, 203, 196, 0.2)',
+    elevation: 2,
   },
   resultsContent: {
     flex: 1,
@@ -563,8 +576,8 @@ const styles = StyleSheet.create({
     borderColor: colors.highlight,
   },
   routineCardSelected: {
-    borderColor: colors.primary,
-    backgroundColor: colors.primary + '05',
+    borderColor: colors.wellness,
+    backgroundColor: colors.accent + '10',
   },
   routineHeader: {
     flexDirection: 'row',
@@ -609,14 +622,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   checkboxSelected: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    backgroundColor: colors.wellness,
+    borderColor: colors.wellness,
   },
   routineSummary: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: colors.primary + '10',
+    backgroundColor: colors.accent + '20',
     padding: 16,
     borderRadius: 12,
   },
@@ -635,8 +648,10 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: 'row',
     gap: 12,
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.06)',
-    elevation: 1,
+    boxShadow: '0px 3px 8px rgba(141, 110, 99, 0.15)',
+    elevation: 2,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.footprint,
   },
   factIcon: {
     width: 56,

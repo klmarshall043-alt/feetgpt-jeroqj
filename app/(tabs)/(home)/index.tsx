@@ -28,10 +28,20 @@ export default function HomeScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
-          {/* Hero Section */}
+          {/* Hero Section with Footprint Pattern */}
           <View style={styles.heroSection}>
+            <View style={styles.footprintPattern}>
+              <View style={styles.footprintLeft}>
+                <IconSymbol name="figure.walk" size={40} color={colors.footprint} style={styles.footprintIcon} />
+              </View>
+              <View style={styles.footprintRight}>
+                <IconSymbol name="figure.walk" size={40} color={colors.footprint} style={styles.footprintIcon} />
+              </View>
+            </View>
             <View style={styles.heroIconContainer}>
-              <IconSymbol name="heart.circle.fill" size={64} color={colors.primary} />
+              <View style={styles.heroIconCircle}>
+                <IconSymbol name="heart.circle.fill" size={64} color={colors.wellness} />
+              </View>
             </View>
             <Text style={styles.heroTitle}>Welcome to FeetGPT</Text>
             <Text style={styles.heroSubtitle}>
@@ -39,12 +49,17 @@ export default function HomeScreen() {
             </Text>
           </View>
 
-          {/* Inspirational Message */}
+          {/* Inspirational Message with Spa Theme */}
           <View style={styles.inspirationalCard}>
-            <IconSymbol name="sparkles" size={24} color={colors.accent} />
-            <Text style={styles.inspirationalText}>
-              Your feet are incredible! They carry you through life, support your entire body, and deserve your appreciation and care.
-            </Text>
+            <View style={styles.inspirationalIconBg}>
+              <IconSymbol name="sparkles" size={28} color={colors.wellness} />
+            </View>
+            <View style={styles.inspirationalContent}>
+              <Text style={styles.inspirationalTitle}>Daily Inspiration</Text>
+              <Text style={styles.inspirationalText}>
+                Your feet are incredible! They carry you through life, support your entire body, and deserve your appreciation and care.
+              </Text>
+            </View>
           </View>
 
           {/* Daily Affirmation */}
@@ -82,10 +97,48 @@ const styles = StyleSheet.create({
   heroSection: {
     alignItems: 'center',
     marginBottom: 24,
-    paddingVertical: 20,
+    paddingVertical: 30,
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    position: 'relative',
+    overflow: 'hidden',
+    boxShadow: '0px 4px 12px rgba(141, 110, 99, 0.15)',
+    elevation: 3,
+  },
+  footprintPattern: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    opacity: 0.1,
+  },
+  footprintLeft: {
+    transform: [{ rotate: '-15deg' }],
+  },
+  footprintRight: {
+    transform: [{ rotate: '15deg' }],
+  },
+  footprintIcon: {
+    opacity: 0.5,
   },
   heroIconContainer: {
     marginBottom: 16,
+    zIndex: 1,
+  },
+  heroIconCircle: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: colors.accent + '20',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: colors.accent + '40',
   },
   heroTitle: {
     fontSize: 32,
@@ -93,6 +146,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     textAlign: 'center',
     marginBottom: 12,
+    zIndex: 1,
   },
   heroSubtitle: {
     fontSize: 16,
@@ -100,25 +154,42 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     maxWidth: 320,
+    zIndex: 1,
   },
   inspirationalCard: {
-    backgroundColor: colors.card,
-    borderRadius: 16,
+    backgroundColor: colors.accent,
+    borderRadius: 20,
     padding: 20,
     marginBottom: 24,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.08)',
-    elevation: 2,
-    borderLeftWidth: 4,
-    borderLeftColor: colors.accent,
+    boxShadow: '0px 4px 12px rgba(128, 203, 196, 0.3)',
+    elevation: 4,
+    borderWidth: 2,
+    borderColor: colors.wellness,
+  },
+  inspirationalIconBg: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  inspirationalContent: {
+    flex: 1,
+  },
+  inspirationalTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.text,
+    marginBottom: 6,
   },
   inspirationalText: {
-    flex: 1,
     fontSize: 15,
     color: colors.text,
     lineHeight: 22,
-    marginLeft: 12,
     fontWeight: '500',
   },
   bottomSpacer: {

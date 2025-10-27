@@ -35,9 +35,11 @@ export default function GalleryScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
-          {/* Header */}
+          {/* Header with Feet Theme */}
           <View style={styles.header}>
-            <IconSymbol name="photo.fill" size={48} color={colors.primary} />
+            <View style={styles.headerIconBg}>
+              <IconSymbol name="photo.fill" size={48} color={colors.wellness} />
+            </View>
             <Text style={styles.headerTitle}>Normalization Gallery</Text>
             <Text style={styles.headerSubtitle}>
               Celebrate the natural diversity of feet
@@ -175,7 +177,7 @@ function FeetGallery() {
     <View style={styles.galleryContent}>
       {/* Info Banner */}
       <View style={styles.infoBanner}>
-        <IconSymbol name="info.circle.fill" size={20} color={colors.primary} />
+        <IconSymbol name="info.circle.fill" size={20} color={colors.wellness} />
         <Text style={styles.infoBannerText}>
           This is a safe space to view and appreciate the natural diversity of feet. All submissions are moderated.
         </Text>
@@ -208,7 +210,7 @@ function FeetGallery() {
               ) : (
                 image.comments.map((comment, index) => (
                   <View key={index} style={styles.commentBubble}>
-                    <IconSymbol name="heart.fill" size={12} color={colors.accent} />
+                    <IconSymbol name="heart.fill" size={12} color={colors.care} />
                     <Text style={styles.commentText}>{comment}</Text>
                   </View>
                 ))
@@ -245,7 +247,7 @@ function FeetGallery() {
                   style={styles.addCommentButton}
                   onPress={() => setSelectedImage(image.id)}
                 >
-                  <IconSymbol name="plus.circle" size={16} color={colors.primary} />
+                  <IconSymbol name="plus.circle" size={16} color={colors.wellness} />
                   <Text style={styles.addCommentText}>Add supportive comment</Text>
                 </Pressable>
               )}
@@ -257,10 +259,10 @@ function FeetGallery() {
       {/* Guidelines */}
       <View style={styles.guidelines}>
         <Text style={styles.guidelinesTitle}>Community Guidelines</Text>
-        <Text style={styles.guidelineItem}>• Focus on function and care, not appearance</Text>
-        <Text style={styles.guidelineItem}>• Be supportive and non-critical</Text>
-        <Text style={styles.guidelineItem}>• Celebrate diversity and uniqueness</Text>
-        <Text style={styles.guidelineItem}>• Report any inappropriate content</Text>
+        <Text style={styles.guidelineItem}>- Focus on function and care, not appearance</Text>
+        <Text style={styles.guidelineItem}>- Be supportive and non-critical</Text>
+        <Text style={styles.guidelineItem}>- Celebrate diversity and uniqueness</Text>
+        <Text style={styles.guidelineItem}>- Report any inappropriate content</Text>
       </View>
     </View>
   );
@@ -314,7 +316,7 @@ function PerspectiveJournal() {
     <View style={styles.journalContent}>
       {/* Info */}
       <View style={styles.journalInfo}>
-        <IconSymbol name="book.fill" size={24} color={colors.primary} />
+        <IconSymbol name="book.fill" size={24} color={colors.wellness} />
         <Text style={styles.journalInfoText}>
           Track your feelings before and after engaging with the gallery or self-care routines. 
           This private journal helps you see your progress over time.
@@ -404,7 +406,7 @@ function PerspectiveJournal() {
                   <Text style={styles.feelingText}>{entry.beforeFeeling}</Text>
                 </View>
                 
-                <IconSymbol name="arrow.right" size={20} color={colors.primary} />
+                <IconSymbol name="arrow.right" size={20} color={colors.wellness} />
                 
                 <View style={styles.feelingSection}>
                   <Text style={styles.feelingLabel}>After:</Text>
@@ -419,7 +421,7 @@ function PerspectiveJournal() {
       {/* Progress Insight */}
       {entries.length > 0 && (
         <View style={styles.progressInsight}>
-          <IconSymbol name="chart.line.uptrend.xyaxis" size={24} color={colors.primary} />
+          <IconSymbol name="chart.line.uptrend.xyaxis" size={24} color={colors.wellness} />
           <View style={styles.progressContent}>
             <Text style={styles.progressTitle}>Your Progress</Text>
             <Text style={styles.progressText}>
@@ -453,11 +455,21 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     paddingVertical: 20,
   },
+  headerIconBg: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: colors.accent + '30',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 3,
+    borderColor: colors.accent + '50',
+  },
   headerTitle: {
     fontSize: 28,
     fontWeight: '800',
     color: colors.text,
-    marginTop: 12,
     marginBottom: 8,
   },
   headerSubtitle: {
@@ -502,10 +514,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 12,
-    backgroundColor: colors.primary + '10',
+    backgroundColor: colors.accent + '20',
     padding: 16,
     borderRadius: 12,
     marginBottom: 20,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.wellness,
   },
   infoBannerText: {
     flex: 1,
@@ -523,6 +537,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 12,
     marginBottom: 24,
+    boxShadow: '0px 4px 10px rgba(141, 110, 99, 0.2)',
+    elevation: 3,
   },
   uploadButtonText: {
     fontSize: 16,
@@ -535,10 +551,10 @@ const styles = StyleSheet.create({
   },
   galleryItem: {
     backgroundColor: colors.card,
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: 'hidden',
-    boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.08)',
-    elevation: 2,
+    boxShadow: '0px 3px 10px rgba(141, 110, 99, 0.15)',
+    elevation: 3,
   },
   galleryImage: {
     width: '100%',
@@ -550,7 +566,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(62, 39, 35, 0.7)',
     padding: 12,
   },
   imageDescription: {
@@ -617,7 +633,7 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
   },
   commentActionSubmit: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.wellness,
   },
   commentActionSubmitText: {
     fontSize: 14,
@@ -633,14 +649,14 @@ const styles = StyleSheet.create({
   addCommentText: {
     fontSize: 13,
     fontWeight: '600',
-    color: colors.primary,
+    color: colors.wellness,
   },
   guidelines: {
     backgroundColor: colors.card,
     borderRadius: 12,
     padding: 16,
     borderLeftWidth: 4,
-    borderLeftColor: colors.accent,
+    borderLeftColor: colors.care,
   },
   guidelinesTitle: {
     fontSize: 16,
@@ -666,7 +682,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 20,
     borderLeftWidth: 4,
-    borderLeftColor: colors.primary,
+    borderLeftColor: colors.wellness,
   },
   journalInfoText: {
     flex: 1,
@@ -684,6 +700,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 12,
     marginBottom: 24,
+    boxShadow: '0px 4px 10px rgba(141, 110, 99, 0.2)',
+    elevation: 3,
   },
   newEntryButtonText: {
     fontSize: 16,
@@ -736,7 +754,7 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
   },
   formButtonSubmit: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.wellness,
   },
   formButtonSubmitText: {
     fontSize: 14,
@@ -807,7 +825,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 12,
-    backgroundColor: colors.primary + '10',
+    backgroundColor: colors.accent + '20',
     padding: 16,
     borderRadius: 12,
   },

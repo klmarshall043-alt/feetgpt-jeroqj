@@ -18,14 +18,14 @@ const tips: TipItem[] = [
     icon: 'drop.fill',
     title: 'Daily Hygiene',
     description: 'Wash your feet daily with mild soap and warm water. Dry thoroughly, especially between toes.',
-    color: colors.primary,
+    color: colors.wellness,
   },
   {
     id: '2',
     icon: 'scissors',
     title: 'Nail Care',
     description: 'Trim toenails straight across to prevent ingrown nails. Keep them at a moderate length.',
-    color: colors.accent,
+    color: colors.care,
   },
   {
     id: '3',
@@ -39,21 +39,21 @@ const tips: TipItem[] = [
     icon: 'figure.walk',
     title: 'Moisturize',
     description: 'Apply moisturizer daily to prevent dry, cracked skin. Focus on heels and soles.',
-    color: colors.accent,
+    color: colors.wellness,
   },
   {
     id: '5',
     icon: 'heart.fill',
     title: 'Massage',
     description: 'Give yourself a foot massage to improve circulation and relieve tension.',
-    color: colors.primary,
+    color: colors.care,
   },
   {
     id: '6',
     icon: 'eye.fill',
     title: 'Regular Checks',
     description: 'Inspect your feet regularly for cuts, blisters, or changes. Early detection is key.',
-    color: colors.accent,
+    color: colors.primary,
   },
 ];
 
@@ -61,7 +61,9 @@ export default function SelfCareTips() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <IconSymbol name="sparkles" size={28} color={colors.primary} />
+        <View style={styles.headerIconBg}>
+          <IconSymbol name="sparkles" size={24} color={colors.wellness} />
+        </View>
         <Text style={styles.headerTitle}>Self-Care Tips</Text>
       </View>
       <Text style={styles.subtitle}>
@@ -73,8 +75,8 @@ export default function SelfCareTips() {
       >
         {tips.map((tip) => (
           <View key={tip.id} style={styles.tipCard}>
-            <View style={[styles.iconContainer, { backgroundColor: tip.color + '20' }]}>
-              <IconSymbol name={tip.icon as any} size={24} color={tip.color} />
+            <View style={[styles.iconContainer, { backgroundColor: tip.color + '25' }]}>
+              <IconSymbol name={tip.icon as any} size={26} color={tip.color} />
             </View>
             <View style={styles.tipContent}>
               <Text style={styles.tipTitle}>{tip.title}</Text>
@@ -97,47 +99,58 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
+  headerIconBg: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.accent + '30',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '700',
     color: colors.text,
-    marginLeft: 8,
   },
   subtitle: {
     fontSize: 14,
     color: colors.textSecondary,
     marginBottom: 16,
     lineHeight: 20,
+    marginLeft: 50,
   },
   tipsContainer: {
     maxHeight: 400,
   },
   tipCard: {
     backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: 16,
+    padding: 18,
     marginBottom: 12,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.08)',
+    boxShadow: '0px 3px 8px rgba(141, 110, 99, 0.12)',
     elevation: 2,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.footprint,
   },
   iconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
+    marginRight: 14,
   },
   tipContent: {
     flex: 1,
   },
   tipTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '600',
     color: colors.text,
-    marginBottom: 4,
+    marginBottom: 5,
   },
   tipDescription: {
     fontSize: 14,

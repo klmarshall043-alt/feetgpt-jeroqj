@@ -33,7 +33,9 @@ export default function Affirmations() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <IconSymbol name="heart.fill" size={28} color={colors.accent} />
+        <View style={styles.headerIconBg}>
+          <IconSymbol name="heart.fill" size={24} color={colors.care} />
+        </View>
         <Text style={styles.headerTitle}>Daily Affirmation</Text>
       </View>
       <Text style={styles.subtitle}>
@@ -41,8 +43,14 @@ export default function Affirmations() {
       </Text>
       
       <View style={styles.affirmationCard}>
+        <View style={styles.decorativeTop}>
+          <View style={styles.decorativeDot} />
+          <View style={styles.decorativeDot} />
+          <View style={styles.decorativeDot} />
+        </View>
+        
         <View style={styles.quoteIconContainer}>
-          <IconSymbol name="quote.opening" size={32} color={colors.primary + '40'} />
+          <IconSymbol name="quote.opening" size={36} color={colors.primary + '50'} />
         </View>
         
         <Text style={styles.affirmationText}>
@@ -54,7 +62,7 @@ export default function Affirmations() {
             onPress={handlePrevious}
             style={styles.navButton}
           >
-            <IconSymbol name="chevron.left" size={24} color={colors.primary} />
+            <IconSymbol name="chevron.left" size={24} color={colors.card} />
           </Pressable>
           
           <View style={styles.dotsContainer}>
@@ -73,7 +81,7 @@ export default function Affirmations() {
             onPress={handleNext}
             style={styles.navButton}
           >
-            <IconSymbol name="chevron.right" size={24} color={colors.primary} />
+            <IconSymbol name="chevron.right" size={24} color={colors.card} />
           </Pressable>
         </View>
       </View>
@@ -91,37 +99,61 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
+  headerIconBg: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.care + '30',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '700',
     color: colors.text,
-    marginLeft: 8,
   },
   subtitle: {
     fontSize: 14,
     color: colors.textSecondary,
     marginBottom: 16,
     lineHeight: 20,
+    marginLeft: 50,
   },
   affirmationCard: {
-    backgroundColor: colors.card,
-    borderRadius: 16,
-    padding: 24,
+    backgroundColor: colors.primary,
+    borderRadius: 20,
+    padding: 28,
     alignItems: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-    elevation: 3,
+    boxShadow: '0px 6px 16px rgba(141, 110, 99, 0.25)',
+    elevation: 4,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  decorativeTop: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    flexDirection: 'row',
+    gap: 6,
+  },
+  decorativeDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
   },
   quoteIconContainer: {
     marginBottom: 16,
   },
   affirmationText: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: colors.text,
+    fontSize: 19,
+    fontWeight: '600',
+    color: colors.card,
     textAlign: 'center',
-    lineHeight: 28,
-    marginBottom: 24,
-    minHeight: 84,
+    lineHeight: 30,
+    marginBottom: 28,
+    minHeight: 90,
   },
   navigationContainer: {
     flexDirection: 'row',
@@ -130,28 +162,30 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   navButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.highlight,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
   },
   dotsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 7,
   },
   dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.highlight,
+    width: 7,
+    height: 7,
+    borderRadius: 3.5,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
   },
   activeDot: {
-    backgroundColor: colors.primary,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+    backgroundColor: colors.card,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
   },
 });

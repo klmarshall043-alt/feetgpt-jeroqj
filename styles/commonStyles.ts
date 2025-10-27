@@ -1,15 +1,26 @@
 
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
+// Feet-themed color palette with earthy tones
 export const colors = {
-  background: '#F8F9FA',
-  text: '#212529',
-  textSecondary: '#6C757D',
-  primary: '#007BFF',
-  secondary: '#6C757D',
-  accent: '#FFC107',
+  // Earthy base colors
+  background: '#F5F1E8', // Warm beige
+  text: '#3E2723', // Deep brown
+  textSecondary: '#6D4C41', // Medium brown
+  
+  // Primary colors - spa/wellness inspired
+  primary: '#8D6E63', // Warm taupe
+  secondary: '#A1887F', // Light taupe
+  accent: '#80CBC4', // Seafoam teal (spa-like)
+  
+  // Card and UI elements
   card: '#FFFFFF',
-  highlight: '#E9ECEF',
+  highlight: '#EFEBE9', // Very light beige
+  
+  // Additional themed colors
+  footprint: '#BCAAA4', // Soft tan
+  wellness: '#4DB6AC', // Teal accent
+  care: '#FFB74D', // Warm amber
 };
 
 export const buttonStyles = StyleSheet.create({
