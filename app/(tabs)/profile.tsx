@@ -1,11 +1,37 @@
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Platform, Pressable, Alert } from "react-native";
 import { IconSymbol } from "@/components/IconSymbol";
 import { colors } from "@/styles/commonStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "expo-router";
 
 export default function ProfileScreen() {
+  const { user, signOut } = useAuth();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    Alert.alert(
+      "Sign Out",
+      "Are you sure you want to sign out?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Sign Out",
+          style: "destructive",
+          onPress: async () => {
+            await signOut();
+            router.replace('/(auth)/sign-in');
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <View style={styles.container}>
@@ -22,7 +48,8 @@ export default function ProfileScreen() {
             <View style={styles.avatarContainer}>
               <IconSymbol name="person.circle.fill" size={80} color={colors.primary} />
             </View>
-            <Text style={styles.profileName}>Your Journey</Text>
+            <Text style={styles.profileName}>{user?.username || 'User'}</Text>
+            <Text style={styles.profileEmail}>{user?.email || ''}</Text>
             <Text style={styles.profileSubtitle}>
               Track your progress and celebrate your commitment to foot health
             </Text>
@@ -57,6 +84,43 @@ export default function ProfileScreen() {
                 <IconSymbol name="star.fill" size={32} color={colors.accent} />
                 <Text style={styles.statNumber}>100%</Text>
                 <Text style={styles.statLabel}>Commitment</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Account Section */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Account</Text>
+            
+            <View style={styles.accountCard}>
+              <View style={styles.accountRow}>
+                <IconSymbol name="person.fill" size={20} color={colors.textSecondary} />
+                <View style={styles.accountInfo}>
+                  <Text style={styles.accountLabel}>Username</Text>
+                  <Text style={styles.accountValue}>{user?.username || 'Not set'}</Text>
+                </View>
+              </View>
+
+              <View style={styles.divider} />
+
+              <View style={styles.accountRow}>
+                <IconSymbol name="envelope.fill" size={20} color={colors.textSecondary} />
+                <View style={styles.accountInfo}>
+                  <Text style={styles.accountLabel}>Email</Text>
+                  <Text style={styles.accountValue}>{user?.email || 'Not set'}</Text>
+                </View>
+              </View>
+
+              <View style={styles.divider} />
+
+              <View style={styles.accountRow}>
+                <IconSymbol name="calendar" size={20} color={colors.textSecondary} />
+                <View style={styles.accountInfo}>
+                  <Text style={styles.accountLabel}>Member Since</Text>
+                  <Text style={styles.accountValue}>
+                    {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Unknown'}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -100,6 +164,14 @@ export default function ProfileScreen() {
             </View>
           </View>
 
+          {/* Sign Out Button */}
+          <View style={styles.section}>
+            <Pressable style={styles.signOutButton} onPress={handleSignOut}>
+              <IconSymbol name="arrow.right.square.fill" size={20} color="#FFFFFF" />
+              <Text style={styles.signOutText}>Sign Out</Text>
+            </Pressable>
+          </View>
+
           <View style={styles.bottomSpacer} />
         </ScrollView>
       </View>
@@ -138,6 +210,11 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     color: colors.text,
+    marginBottom: 4,
+  },
+  profileEmail: {
+    fontSize: 14,
+    color: colors.textSecondary,
     marginBottom: 8,
   },
   profileSubtitle: {
@@ -182,6 +259,36 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     textAlign: 'center',
   },
+  accountCard: {
+    backgroundColor: colors.card,
+    borderRadius: 12,
+    padding: 20,
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.08)',
+    elevation: 2,
+  },
+  accountRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+  },
+  accountInfo: {
+    flex: 1,
+  },
+  accountLabel: {
+    fontSize: 12,
+    color: colors.textSecondary,
+    marginBottom: 4,
+  },
+  accountValue: {
+    fontSize: 16,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: colors.highlight,
+    marginVertical: 16,
+  },
   aboutCard: {
     backgroundColor: colors.card,
     borderRadius: 12,
@@ -211,6 +318,23 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginLeft: 12,
     lineHeight: 20,
+  },
+  signOutButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
+  },
+  signOutText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#FFFFFF',
   },
   bottomSpacer: {
     height: 40,

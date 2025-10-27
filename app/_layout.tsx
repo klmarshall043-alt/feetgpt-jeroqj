@@ -1,3 +1,4 @@
+
 import "react-native-reanimated";
 import React, { useEffect } from "react";
 import { useFonts } from "expo-font";
@@ -16,12 +17,13 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Button } from "@/components/button";
 import { WidgetProvider } from "@/contexts/WidgetContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  initialRouteName: "index",
 };
 
 export default function RootLayout() {
@@ -80,12 +82,19 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style="auto" animated />
+      <AuthProvider>
         <ThemeProvider
           value={colorScheme === "dark" ? CustomDarkTheme : CustomDefaultTheme}
         >
           <WidgetProvider>
             <GestureHandlerRootView>
             <Stack>
+              {/* Index/redirect screen */}
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+
+              {/* Auth screens */}
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+
               {/* Main app with tabs */}
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
@@ -119,6 +128,7 @@ export default function RootLayout() {
             </GestureHandlerRootView>
           </WidgetProvider>
         </ThemeProvider>
+      </AuthProvider>
     </>
   );
 }
