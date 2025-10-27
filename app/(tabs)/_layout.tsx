@@ -21,22 +21,16 @@ export default function TabLayout() {
       label: 'Learn',
     },
     {
-      name: 'ai-chat',
-      route: '/(tabs)/ai-chat',
-      icon: 'sparkles',
-      label: 'Ask AI',
-    },
-    {
       name: 'gallery',
       route: '/(tabs)/gallery',
       icon: 'photo.fill',
       label: 'Gallery',
     },
     {
-      name: 'community',
-      route: '/(tabs)/community',
-      icon: 'person.3.fill',
-      label: 'Community',
+      name: 'ai-chat',
+      route: '/(tabs)/ai-chat',
+      icon: 'sparkles',
+      label: 'Ask AI',
     },
   ];
 
@@ -51,17 +45,13 @@ export default function TabLayout() {
           <Icon sf="book.fill" drawable="ic_learn" />
           <Label>Learn</Label>
         </NativeTabs.Trigger>
-        <NativeTabs.Trigger name="ai-chat">
-          <Icon sf="sparkles" drawable="ic_ai" />
-          <Label>Ask AI</Label>
-        </NativeTabs.Trigger>
         <NativeTabs.Trigger name="gallery">
           <Icon sf="photo.fill" drawable="ic_gallery" />
           <Label>Gallery</Label>
         </NativeTabs.Trigger>
-        <NativeTabs.Trigger name="community">
-          <Icon sf="person.3.fill" drawable="ic_community" />
-          <Label>Community</Label>
+        <NativeTabs.Trigger name="ai-chat">
+          <Icon sf="sparkles" drawable="ic_ai" />
+          <Label>Ask AI</Label>
         </NativeTabs.Trigger>
       </NativeTabs>
     );
@@ -95,21 +85,15 @@ export default function TabLayout() {
           }}
         />
         <Stack.Screen 
-          name="ai-chat" 
-          options={{
-            title: 'Ask AI',
-          }}
-        />
-        <Stack.Screen 
           name="gallery" 
           options={{
             title: 'Gallery',
           }}
         />
         <Stack.Screen 
-          name="community" 
+          name="ai-chat" 
           options={{
-            title: 'Community',
+            title: 'Ask AI',
           }}
         />
       </Stack>
