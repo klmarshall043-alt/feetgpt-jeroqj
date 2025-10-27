@@ -32,12 +32,6 @@ export default function TabLayout() {
       icon: 'person.3.fill',
       label: 'Community',
     },
-    {
-      name: 'profile',
-      route: '/(tabs)/profile',
-      icon: 'person.fill',
-      label: 'Profile',
-    },
   ];
 
   const HeaderLogo = () => (
@@ -68,10 +62,6 @@ export default function TabLayout() {
         <NativeTabs.Trigger name="community">
           <Icon sf="person.3.fill" drawable="ic_community" />
           <Label>Community</Label>
-        </NativeTabs.Trigger>
-        <NativeTabs.Trigger name="profile">
-          <Icon sf="person.fill" drawable="ic_profile" />
-          <Label>Profile</Label>
         </NativeTabs.Trigger>
       </NativeTabs>
     );
@@ -115,12 +105,6 @@ export default function TabLayout() {
           name="community" 
           options={{
             title: 'Community',
-          }}
-        />
-        <Stack.Screen 
-          name="profile" 
-          options={{
-            title: 'Profile',
           }}
         />
       </Stack>
